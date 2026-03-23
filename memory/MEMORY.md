@@ -15,6 +15,9 @@
 | 2 | BaseChart.vue 核心组件 | ✅ |
 | 3 | chartConfig.js 配置生成器 | ✅ |
 | 4 | theme.js 主题管理 | ✅ |
+| 5 | Playwright 测试 | ✅ |
+
+> 注：首次运行测试前需手动安装浏览器：`npx playwright install chromium`
 
 状态说明：⏳ 待完成 | 🚧 进行中 | ✅ 已完成
 
@@ -36,36 +39,35 @@ src/
 
 ---
 
-## Playwright 测试方案 (后续执行)
+## Playwright 测试方案
 
-### 安装
+### 已完成的测试用例
+
+| 测试项 | 状态 |
+|--------|------|
+| 折线图渲染 | ✅ |
+| 柱状图渲染 | ✅ |
+| 饼图渲染 | ✅ |
+| 散点图渲染 | ✅ |
+| 雷达图渲染 | ✅ |
+| 主题切换 | ✅ |
+| 加载状态 | ✅ |
+| 空数据状态 | ✅ |
+| 点击事件 | ✅ |
+| 响应式布局 | ✅ |
+
+### 运行测试
+
 ```bash
-pnpm add -D @playwright/test
-npx playwright install
+# 首次运行需安装浏览器
+npx playwright install chromium
+
+# 运行测试
+pnpm test
+
+# UI 模式
+pnpm test:ui
+
+# 查看报告
+pnpm test:report
 ```
-
-### 测试用例规划
-```
-tests/
-├── base-chart.spec.js      # 基础图表测试
-├── theme.spec.js           # 主题切换测试
-└── responsive.spec.js      # 响应式测试
-```
-
-### 测试点
-1. **渲染测试**
-   - 各类型图表正确渲染 (line/bar/pie/scatter/radar)
-   - 数据正确显示
-
-2. **状态测试**
-   - loading 状态显示
-   - empty 状态显示
-   - error 状态显示 + 重试功能
-
-3. **交互测试**
-   - 主题切换
-   - 响应式 resize
-   - 点击事件
-
-4. **内存泄漏测试**
-   - 组件销毁后实例已清理
